@@ -1,7 +1,6 @@
-on:
-  push:
-    tags:
-      - v*
+on: 
+  repository_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:
