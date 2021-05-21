@@ -52,7 +52,6 @@ jobs:
           mv /opt/rt-n56u/trunk/images/*.trx /opt/bin/k2p_xray.trx
       - name: Upload bin directory
         uses: actions/upload-artifact@master
-        if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
         with:
           name: Padavan_bin
           path: opt/bin
