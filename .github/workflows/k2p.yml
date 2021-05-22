@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    env:
+      images_dir: /opt/bin
     steps:
       - name: init
         run: |
@@ -50,11 +52,16 @@ jobs:
           sed -i 's/CONFIG_FIRMWARE_INCLUDE_XRAY=n/CONFIG_FIRMWARE_INCLUDE_XRAY=y/' configs/templates/K2P-5.0.config
           fakeroot ./build_firmware_modify K2P-5.0
           mv /opt/rt-n56u/trunk/images/*.trx /opt/bin/k2p_xray.trx
-      - name: Upload bin directory
-        uses: actions/upload-artifact@master
+          
+      - name: Upload images to Artifact
+        uses: actions/upload-artifact@v2.2.1
         with:
-          name: Padavan_bin
-          path: opt/bin
+          path: ${{ env.images_dir }}/*.7z
+      #- name: Upload bin directory
+      #  uses: actions/upload-artifact@master
+      #  with:
+      #    name: Padavan_bin
+      #    path: opt/bin
         
      # - name: Upload artifact
      #   uses: "marvinpinto/action-automatic-releases@latest"
